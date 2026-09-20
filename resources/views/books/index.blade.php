@@ -1,2 +1,24 @@
-<h1> Daftar Buku </h1>
-<p>Berikut adalah daftar buku yang tersedia:</p>
+@extends('layouts.app')
+
+@section('title', 'Daftar Buku')
+
+@section('content')
+
+<h2>Daftar Buku</h2>
+
+@foreach($books as $book)
+    <div>
+        <h3>{{ $book['title'] }}</h3>
+        <p>Penulis: {{ $book['author'] }}</p>
+        <p>Tahun Terbit: {{ $book['year'] }}</p>
+    </div>
+    <hr>
+@endforeach
+
+    @if($stock > 0)
+        <p>Buku tersedia: {{ $stock }}</p>
+    @else
+        <p>Buku sedang habis.</p>
+    @endif
+
+@endsection
