@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -62,6 +61,15 @@
                 {{ request()->is('members*') ? 'text-blue-700 bg-blue-50' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50' }}">
                     Members
                 </a>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit"
+                        class="px-4 py-2 rounded-lg transition duration-200
+                        text-slate-600 hover:text-blue-700 hover:bg-slate-50">
+                        Logout
+                    </button>
+                </form>
 
 
             </nav>
