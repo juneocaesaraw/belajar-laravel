@@ -62,14 +62,26 @@
                     Members
                 </a>
 
+                @can('manage-users')
+                    <a href="{{ route('users.index') }}" class="px-4 py-2 rounded-lg transition duration-200
+                    {{ request()->is('users*') ? 'text-blue-700 bg-blue-50' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50' }}">
+                        Kelola Pengguna
+                    </a>
+                @endcan
+
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit"
-                        class="px-4 py-2 rounded-lg transition duration-200
-                        text-slate-600 hover:text-blue-700 hover:bg-slate-50">
+                        class="inline-flex items-center justify-center gap-2
+                        bg-red-600 text-white px-4 py-2.5 rounded-lg
+                        text-sm font-semibold shadow-sm
+                        hover:bg-red-700 transition">
                         Logout
                     </button>
                 </form>
+
+                
+
 
 
             </nav>

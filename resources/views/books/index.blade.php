@@ -94,17 +94,18 @@
                     Edit
                 </a>
 
-                <form action="{{ route('books.destroy', $book) }}"
-                      method="POST"
-                      onsubmit="return confirm('Apakah kamu yakin ingin menghapus buku ini?')">
-                    @csrf
-                    @method('DELETE')
+                @can('delete', $book)
+                    <form action="{{ route('books.destroy', $book->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
 
-                    <button type="submit"
-                            class="text-red-500 hover:text-red-700 transition">
-                        Hapus
-                    </button>
-                </form>
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">Delete</button>
+                    </form>
+                @endcan
+
 
             </div>
 

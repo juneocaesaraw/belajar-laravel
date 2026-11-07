@@ -6,12 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
-
-
-Route:: middleware('guest')->group(function () {
-    Route::get('login', [AuthController::class, "showLogin"])->name('login');
-    Route::post('login', [AuthController::class, "login"])->name ('login.submit');
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 });
 
 Route::post('logout', [AuthController::class, 'logout'])
@@ -20,18 +19,16 @@ Route::post('logout', [AuthController::class, 'logout'])
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-    return view('welcome');
-});
+        return view('welcome');
+    });
 
-    Route::resource ('books', BookController::class);
+    Route::resource('books', BookController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('members', MemberController::class);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 
-// Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index']);
-// Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
-// Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
-
-// Route::get('/members/{id}', [MemberController::class, 'show']);
-// Route::get('/categories/{id}', [CategoryController::class, 'show']);
+// Khusus admin yang memiliki izin manage-users
+Route::middleware(['auth', 'can:manage-users'])->group(function () {
+    Route::resource('users', UserController::class);
+});
