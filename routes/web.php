@@ -7,6 +7,8 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BorrowingController;
+
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
@@ -26,6 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('members', MemberController::class);
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::resource('borrowings', BorrowingController::class)
+        ->only(['index', 'create', 'store', 'show']);
+
+    Route::post(
+        'borrowings/{borrowing}/return',
+        [BorrowingController::class, 'returnBook']
+    )->name('borrowings.return');
 });
 
 // Khusus admin yang memiliki izin manage-users

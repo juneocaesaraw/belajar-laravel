@@ -9,4 +9,9 @@ class Member extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class);
+    }
 }

@@ -63,11 +63,19 @@
                 </a>
 
                 @can('manage-users')
-                    <a href="{{ route('users.index') }}" class="px-4 py-2 rounded-lg transition duration-200
+                        <a href="{{ route('users.index') }}" class="px-4 py-2 rounded-lg transition duration-200
                     {{ request()->is('users*') ? 'text-blue-700 bg-blue-50' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50' }}">
                         Kelola Pengguna
                     </a>
                 @endcan
+
+
+                <a href="{{ route('borrowings.index') }}"
+                class="px-4 py-2 rounded-lg transition duration-200
+                {{ request()->is('borrowings*') ? 'text-blue-700 bg-blue-50' : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50' }}">
+                    Borrowings
+                </a>
+
 
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
